@@ -18,8 +18,8 @@ const CrearReserva = () => {
       setMensaje("Reserva Creada !");
     } catch (error) {
       setError("fecha_inicio");
-      if(error instanceof AxiosError){
-        setMensaje(error.response.data.message)
+      if (error instanceof AxiosError) {
+        setMensaje(error.response.data.message);
       }
     }
   };
@@ -41,28 +41,18 @@ const CrearReserva = () => {
   }, []);
 
   return (
-    <>
-      <div className="flex justify-between items-center mb-4 p-6">
+    <div className="bg-gray-200 min-h-screen">
+      <div className="flex justify-between items-center mb-4 p-6 ">
         <Link
           to={"/reservar"}
-          className="text-blue-500 hover:text-blue-600 font-bold"
+          className="text-blue-500 hover:text-blue-600  bg-white rounded p-2"
         >
           &lt; Volver
         </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start p-4">
-        <div className="bg-white p-6 rounded-lg border border-gray-300">
-          <h1 className="text-2xl font-semibold mb-4">
-            {rancho.nombre_rancho}
-          </h1>
-          <p className="mb-2">Descripción: {rancho.descripcion}</p>
-          <p className="mb-2">Dirección: {rancho.direccion}</p>
-          <p className="mb-2">Precio por noche: ${rancho.precio_por_noche}</p>
-          <p className="mb-2">Máximo de huéspedes: {rancho.cantidad_huesped}</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg border border-gray-300">
+        <div className="bg-white p-6 rounded-lg border ">
           <h2 className="text-2xl font-semibold mb-4">Prepara tu reserva</h2>
           {mensaje && (
             <div className="bg-yellow-200 text-yellow-800 py-2 px-4 mb-4">
@@ -115,8 +105,17 @@ const CrearReserva = () => {
             </button>
           </form>
         </div>
+        <div className="bg-white p-6 rounded-lg border ">
+          <h1 className="text-2xl font-semibold mb-4">
+            {rancho.nombre_rancho}
+          </h1>
+          <p className="mb-2">Descripción: {rancho.descripcion}</p>
+          <p className="mb-2">Dirección: {rancho.direccion}</p>
+          <p className="mb-2">Precio por noche: ${rancho.precio_por_noche}</p>
+          <p className="mb-2">Máximo de huéspedes: {rancho.cantidad_huesped}</p>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -18,6 +18,8 @@ import "./index.css";
 import { RanchoProvider } from "./context/RanchoContext";
 import EditarRancho from "./pages/Rancho/EditarRancho";
 import PruebaDos from "./pages/PruebaDos";
+import MisReservas from "./pages/Reserva/MisReservas";
+import { ReservaProvider } from "./context/ReservasContext";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +81,16 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <CrearReserva />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/misreservas",
+    element: (
+      <ProtectedRoute>
+        <ReservaProvider>
+          <MisReservas />
+        </ReservaProvider>
       </ProtectedRoute>
     ),
   },

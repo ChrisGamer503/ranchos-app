@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSession } from "../../hooks/useSession";
 import axios from "axios";
+import { useReserva } from "../../hooks/useReserva";
 
-const Reserva = () => {
-  const [ranchos, setRanchos] = useState([]);
+const MisReservas = () => {
   const { headers, logout } = useSession();
+  const { reservas, setReservas } = useReserva();
 
-  const obtenerRanchos = async () => {
+  const obtenerReservas = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/ranchos",
+        "http://localhost:5000/reservas",
         headers
       );
 
-
-      setRanchos(data.filter(rancho => rancho.verificado));
+      setReservas(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    obtenerRanchos();
+    obtenerReservas();
   }, []);
 
   return (
@@ -30,7 +30,9 @@ const Reserva = () => {
       <header className="bg-white rounded-t-md">
         <div className="container mx-auto py-6 px-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold">Selección de Ranchos</h1>
+            <Link to={"/redirect"}>
+              <h1 className="text-3xl font-bold">Mis Reservas</h1>
+            </Link>
             <div className="space-x-4">
               <Link
                 to={"/misreservas"}
@@ -57,8 +59,8 @@ const Reserva = () => {
 
       <main className="container mx-auto py-10">
         <div className="grid grid-cols-4 p-4 gap-6">
-          {ranchos.map((rancho) => (
-            <Rancho key={rancho.id} rancho={rancho} />
+          {reservas.map((reserva) => (
+            <Reserva key={reserva.id} reserva={reserva} />
           ))}
         </div>
       </main>
@@ -66,32 +68,39 @@ const Reserva = () => {
   );
 };
 
-{
-  /* <>
-<Link to={"/ranchos/crear"}>Publica tu rancho !</Link>
-<h1>Selecciona un rancho para reservar</h1>
-{ranchos.filter(rancho => rancho.verificado).map(rancho => <Rancho key={rancho.id} rancho={rancho} />)}
-</> */
-}
+const Reserva = ({ reserva }) => {
+  const {headers} = useSession();
+  
+  const {reservas,setReservas} = useReserva();
 
-const Rancho = ({ rancho }) => {
+  const cancelarReserva = async () => {
+    try {
+        await axios.delete("http://localhost:5000/reservas/"+reserva.id,headers);
+
+        setReservas(reservas.filter(reservaDato => reservaDato.id !== reserva.id))
+    } catch (error) {
+        console.log(error)
+    }
+  };
   return (
     <>
       <div className="bg-white shadow-md rounded-lg">
         <div className="p-4">
-          <h2 className="text-xl font-semibold">{rancho.nombre_rancho}</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            {reserva.rancho.nombre_rancho}
+          </h2>
+          <p>Fecha inicio: {reserva.fecha_inicio.split("T")[0]}</p>
+          <p>Fecha fin: {reserva.fecha_fin.split("T")[0]}</p>
+          <p>Precio Total: ${reserva.precio_total}</p>
         </div>
         <div className="p-4 bg-gray-100 border-t border-gray-200">
-          <Link
-            to={"/reservar/" + rancho.id}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full"
-          >
-            Reservar
-          </Link>
+          <button onClick={cancelarReserva} className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md w-full">
+            Cancelar Reserva
+          </button>
         </div>
       </div>
     </>
   );
 };
 
-export default Reserva;
+export default MisReservas;
