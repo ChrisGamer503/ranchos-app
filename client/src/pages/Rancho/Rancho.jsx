@@ -11,7 +11,7 @@ const Rancho = () => {
   const obtenerRanchos = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/ranchos",
+        "https://api-ranchos.onrender.com/ranchos",
         headers
       );
       setRanchos(data);
@@ -50,7 +50,7 @@ const RanchoComponent = ({ rancho }) => {
   const toggleVerificar = async () => {
     try {
       await axios.get(
-        "http://localhost:5000/ranchos/verificar/" + rancho.id,
+        "https://api-ranchos.onrender.com/ranchos/verificar/" + rancho.id,
         headers
       );
 
@@ -62,7 +62,7 @@ const RanchoComponent = ({ rancho }) => {
 
   const eliminarRancho = async () => {
     try {
-      await axios.delete("http://localhost:5000/ranchos/" + rancho.id, headers);
+      await axios.delete("https://api-ranchos.onrender.com/ranchos/" + rancho.id, headers);
 
       const ranchoEliminado = ranchos.filter(
         (ranchoData) => ranchoData.id !== rancho.id
