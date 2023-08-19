@@ -10,7 +10,7 @@ const Reserva = () => {
   const obtenerRanchos = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/ranchos",
+        "https://api-ranchos.onrender.com/ranchos",
         headers
       );
 
