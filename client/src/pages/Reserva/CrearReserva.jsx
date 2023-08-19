@@ -13,7 +13,7 @@ const CrearReserva = () => {
 
   const enviarDatos = async (data) => {
     try {
-      await axios.post("http://localhost:5000/reservas/" + id, data, headers);
+      await axios.post("https://api-ranchos.onrender.com/reservas/" + id, data, headers);
 
       setMensaje("Reserva Creada !");
     } catch (error) {
@@ -27,7 +27,7 @@ const CrearReserva = () => {
   const obtenerRancho = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/ranchos/" + id,
+        "https://api-ranchos.onrender.com/ranchos/" + id,
         headers
       );
       setRancho(data);
