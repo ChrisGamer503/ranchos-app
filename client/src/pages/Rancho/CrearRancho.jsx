@@ -14,7 +14,7 @@ const CrearRancho = () => {
       data.cantidad_huesped = parseInt(data.cantidad_huesped);
       data.precio_por_noche = parseFloat(data.precio_por_noche);
 
-      await axios.post("http://localhost:5000/ranchos", data, headers);
+      await axios.post("https://api-ranchos.onrender.com/ranchos", data, headers);
       setMensaje("Rancho Creado !");
     } catch (error) {
       setError("nombre_rancho");
