@@ -8,7 +8,7 @@ const Registro = () => {
   const [mensaje, setMensaje] = useState("");
   const enviarDatos = async (data) => {
     try {
-      await axios.post("http://localhost:5000/usuarios/register", data);
+      await axios.post("https://api-ranchos.onrender.com/usuarios/register", data);
       setMensaje("Cuenta Creada");
     } catch (error) {
       if (error instanceof AxiosError) {
