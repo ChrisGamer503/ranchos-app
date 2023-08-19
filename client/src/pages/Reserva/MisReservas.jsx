@@ -11,7 +11,7 @@ const MisReservas = () => {
   const obtenerReservas = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/reservas",
+        "https://api-ranchos.onrender.com/reservas",
         headers
       );
 
@@ -75,7 +75,7 @@ const Reserva = ({ reserva }) => {
 
   const cancelarReserva = async () => {
     try {
-        await axios.delete("http://localhost:5000/reservas/"+reserva.id,headers);
+        await axios.delete("https://api-ranchos.onrender.com/reservas/"+reserva.id,headers);
 
         setReservas(reservas.filter(reservaDato => reservaDato.id !== reserva.id))
     } catch (error) {
