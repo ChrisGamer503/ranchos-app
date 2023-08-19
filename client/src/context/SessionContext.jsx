@@ -14,7 +14,7 @@ const SessionProvider = ({ children }) => {
       const tokenLocal = localStorage.getItem("token");
 
       const { data: usuario } = await axios.get(
-        "http://localhost:5000/usuarios/perfil",
+        "https://api-ranchos.onrender.com/usuarios/perfil",
         {
           headers: {
             Authorization: "Bearer " + tokenLocal,
