@@ -15,7 +15,7 @@ const EditarRancho = () => {
     const cargarRancho = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/ranchos/${id}`,
+          `https://api-ranchos.onrender.com/ranchos/${id}`,
           headers
         );
         const rancho = response.data;
@@ -38,7 +38,7 @@ const EditarRancho = () => {
     try {
       data.cantidad_huesped = parseInt(data.cantidad_huesped);
       data.precio_por_noche = parseFloat(data.precio_por_noche);
-      await axios.patch(`http://localhost:5000/ranchos/${id}`, data, headers);
+      await axios.patch(`https://api-ranchos.onrender.com/ranchos/${id}`, data, headers);
       setMensaje("Rancho Editado !");
     } catch (error) {
       setError("nombre_rancho");
