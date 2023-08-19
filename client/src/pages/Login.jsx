@@ -12,7 +12,7 @@ const Login = () => {
   const enviarLogin = async (datos) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/usuarios/login",
+        "https://api-ranchos.onrender.com//usuarios/login",
         datos
       );
 
