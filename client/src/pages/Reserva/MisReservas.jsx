@@ -26,8 +26,6 @@ const MisReservas = () => {
     obtenerReservas();
   }, []);
 
-console.log("Reserva:", reserva);
-console.log("Reserva.rancho:", reserva.rancho);
   return (
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-white rounded-t-md">
@@ -88,6 +86,8 @@ const Reserva = ({ reserva }) => {
     }
   };
 
+console.log("Reserva:", reserva);
+console.log("Reserva.rancho:", reserva.rancho);
   return (
     <>
       <div className="bg-white shadow-md rounded-lg">
