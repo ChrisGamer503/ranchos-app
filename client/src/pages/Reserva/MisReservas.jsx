@@ -14,8 +14,6 @@ const MisReservas = () => {
         "https://api-ranchos.onrender.com/reservas",
         headers
 
-console.log("Reserva:", reserva);
-console.log("Reserva.rancho:", reserva.rancho);
       );
 
       setReservas(data);
@@ -28,6 +26,8 @@ console.log("Reserva.rancho:", reserva.rancho);
     obtenerReservas();
   }, []);
 
+console.log("Reserva:", reserva);
+console.log("Reserva.rancho:", reserva.rancho);
   return (
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-white rounded-t-md">
