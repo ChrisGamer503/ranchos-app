@@ -69,32 +69,44 @@ const MisReservas = () => {
 };
 
 const Reserva = ({ reserva }) => {
-  const {headers} = useSession();
-  
-  const {reservas,setReservas} = useReserva();
+  const { headers } = useSession();
+  const { reservas, setReservas } = useReserva();
 
   const cancelarReserva = async () => {
     try {
-        await axios.delete("https://api-ranchos.onrender.com/reservas/"+reserva.id,headers);
+      await axios.delete(
+        "https://api-ranchos.onrender.com/reservas/" + reserva.id,
+        headers
+      );
 
-        setReservas(reservas.filter(reservaDato => reservaDato.id !== reserva.id))
+      setReservas(reservas.filter((reservaDato) => reservaDato.id !== reserva.id));
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   };
+
   return (
     <>
       <div className="bg-white shadow-md rounded-lg">
         <div className="p-4">
-          <h2 className="text-xl font-semibold mb-4">
-            {reserva.rancho.nombre_rancho}
-          </h2>
-          <p>Fecha inicio: {reserva.fecha_inicio.split("T")[0]}</p>
-          <p>Fecha fin: {reserva.fecha_fin.split("T")[0]}</p>
-          <p>Precio Total: ${reserva.precio_total}</p>
+          {reserva.rancho ? (
+            <>
+              <h2 className="text-xl font-semibold mb-4">
+                {reserva.rancho.nombre_rancho}
+              </h2>
+              <p>Fecha inicio: {reserva.fecha_inicio.split("T")[0]}</p>
+              <p>Fecha fin: {reserva.fecha_fin.split("T")[0]}</p>
+              <p>Precio Total: ${reserva.precio_total}</p>
+            </>
+          ) : (
+            <p className="text-red-500">Rancho no especificado</p>
+          )}
         </div>
         <div className="p-4 bg-gray-100 border-t border-gray-200">
-          <button onClick={cancelarReserva} className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md w-full">
+          <button
+            onClick={cancelarReserva}
+            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md w-full"
+          >
             Cancelar Reserva
           </button>
         </div>
