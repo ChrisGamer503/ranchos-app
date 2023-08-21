@@ -13,6 +13,9 @@ const MisReservas = () => {
       const { data } = await axios.get(
         "https://api-ranchos.onrender.com/reservas",
         headers
+
+console.log("Reserva:", reserva);
+console.log("Reserva.rancho:", reserva.rancho);
       );
 
       setReservas(data);
@@ -114,5 +117,7 @@ const Reserva = ({ reserva }) => {
     </>
   );
 };
+
+
 
 export default MisReservas;
